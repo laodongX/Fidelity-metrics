@@ -6,7 +6,7 @@ setup(
     version="0.1.0",
     author="laodongX",         # 换成你的名字
     long_description=long_description,
-    description="Semantic Fidelity Metrics for LLM/VLM Training: Measuring Information Loss Across Layers",
+    #description="Semantic Fidelity Metrics for LLM/VLM Training: Measuring Information Loss Across Layers",
     packages=find_packages(),
     python_requires=">=3.8",
     install_requires=[
