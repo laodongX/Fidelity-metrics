@@ -1,6 +1,8 @@
+LICENSE
 README.md
 setup.py
 fidelity_metrics/__init__.py
+fidelity_metrics/hook.py
 fidelity_metrics/losses.py
 fidelity_metrics/probe.py
 fidelity_metrics.egg-info/PKG-INFO

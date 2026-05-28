@@ -1,11 +1,16 @@
 Metadata-Version: 2.4
 Name: fidelity-metrics
 Version: 0.1.0
-Summary: Semantic Fidelity Metrics for LLM/VLM Training: Measuring Information Loss Across Layers
 Author: laodongX
 Requires-Python: >=3.8
+License-File: LICENSE
 Requires-Dist: torch>=2.0.0
 Dynamic: author
+Dynamic: description
+Dynamic: license-file
 Dynamic: requires-dist
 Dynamic: requires-python
-Dynamic: summary
+
+# Fidelity-metrics
+semantic-fidelity intended to measure semantic entropy of transition from machine codes to human grammars. In a word, to decline all language-transformed meaningful loss in the future/
+😄
