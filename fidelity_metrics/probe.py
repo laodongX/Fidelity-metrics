@@ -89,20 +89,16 @@ class SemanticFidelityProbe(nn.Module):
         return fidelity.item()
 
     @torch.no_grad()
-    def measure(self, z_layers):
+    def measure(self, z_source,z_target,k=5):
         """
         返回一个 dict：structural, distributional, combined
         """
         """计算相邻层之间的保真度"""
-        flows = []
-        for i in range(len(z_layers) - 1):
-            struct = self.structural_fidelity(z_layers[i], z_layers[i + 1])
-            distr = self.distributional_fidelity(z_layers[i], z_layers[i + 1])
-            flows.append({
-                "layers": f'{i}->{i + 1}',
-                "structural": struct,
-                "distributional": distr,
-                "combined": (struct + distr) / 2
-            })
+        struct = self.structural_fidelity(z_source,z_target,k)
+        distr = self.distributional_fidelity(z_source,z_target)
 
-        return flows
+        return {
+            "structural":struct,
+            "distributional":distr,
+            "combined": (struct + distr) /2
+        }

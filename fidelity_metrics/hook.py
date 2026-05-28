@@ -9,7 +9,7 @@ class LayerwiseFidelityHook:
 
     用法:
         probe = SemanticFidelityProbe(dim=768)
-        hook = LayerwiseFidelityHooK(model, probe)
+        hook = LayerwiseFidelityHook(model, probe)
         hook.register_hooks(["blocks.0", "blocks.4", "blocks.8"])
 
         with torch.no_grad():
@@ -71,7 +71,7 @@ class LayerwiseFidelityHook:
             z_tgt_aligned = z_tgt[:,:min_seq,:]
 
             #调用核心度量方法
-            fidelity_dict = self.probe.measure(z_layers=[z_src_aligned,z_tgt_aligned])
+            fidelity_dict = self.probe.measure(z_src_aligned,z_tgt_aligned)
             #组装报告
             src_name = self._registered_names[i] if i < len(self._registered_names) else str(i)
             tgt_name = self._registered_names[i+1] if i+1 < len(self._registered_names) else str(i+1)
