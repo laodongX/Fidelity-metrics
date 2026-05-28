@@ -15,14 +15,13 @@ def linear_example_one():
 
 
     z_probe = SemanticFidelityProbe(dim=128,num_projections=64)
-    result_fidelity = z_probe.measure(z_layers=[x,x_t])
+    result_fidelity = z_probe.measure(x,x_t)
     print(result_fidelity)
-    for i in result_fidelity:
         # 诊断结论
-        if i['combined'] < 0.6:
-            print("🚨 诊断结果: 场景2发生严重信息断流，建议检查该层的 Engram 门控或 MoE 路由！")
-        else:
-            print("✅ 诊断结果: 场景2保真度正常。")
+    if result_fidelity['combined'] < 0.6:
+        print("🚨 诊断结果: 场景2发生严重信息断流，建议检查该层的 Engram 门控或 MoE 路由！")
+    else:
+        print("✅ 诊断结果: 场景2保真度正常。")
     return result_fidelity
 
 
@@ -44,14 +43,14 @@ def main():
 
     # 测量健康层
     print("📊 场景1: 正常传播 (微小噪声)")
-    report_healthy = probe.measure([z_source, z_target_healthy])[0]
+    report_healthy = probe.measure(z_source, z_target_healthy)
     print(f"  结构保真度: {report_healthy['structural']:.4f}")
     print(f"  分布保真度: {report_healthy['distributional']:.4f}")
     print(f"  综合保真度: {report_healthy['combined']:.4f}\n")
 
     # 测量断裂层
     print("⚠️ 场景2: 信息断裂 (巨大噪声)")
-    report_broken = probe.measure([z_source, z_target_broken])[0]
+    report_broken = probe.measure(z_source, z_target_broken)
     print(f"  结构保真度: {report_broken['structural']:.4f}")
     print(f"  分布保真度: {report_broken['distributional']:.4f}")
     print(f"  综合保真度: {report_broken['combined']:.4f}\n")
