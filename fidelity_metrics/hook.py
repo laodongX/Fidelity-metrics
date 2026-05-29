@@ -34,6 +34,8 @@ class LayerwiseFidelityHook:
             elif isinstance(out, tuple) and isinstance(out[0], torch.Tensor):
                 self.outputs[name] = out[0].detach().cpu()
 
+                print(out)
+
         return fn
 
     def register_hooks(self,layer_names:List[str]):
@@ -97,7 +99,8 @@ class LayerwiseFidelityHook:
                     **fidelity_dict
                 }
             )
-            self.outputs = {}
+        #print(self.outputs.keys())
+        self.outputs = {}
 
         return report
 

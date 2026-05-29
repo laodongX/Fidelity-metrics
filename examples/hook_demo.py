@@ -8,9 +8,9 @@ class Modeltest(nn.Module):
     def __init__(self):
         super(Modeltest, self).__init__()
         self.linears = nn.Sequential(
-            nn.Linear(128, 256),
+            nn.Linear(128, 128),
             nn.SiLU(),
-            nn.Linear(256, 128)
+            nn.Linear(128, 128)
         )
         self.lineart = nn.Linear(128, 128, bias=False)
 
@@ -31,4 +31,7 @@ with torch.no_grad():
     output = model(x)
 
 report = layerhook.get_report()
-print(report)
+for r in report:
+    print(f"  {r['layers']}: structural={r['structural']:.4f}, distributional={r['distributional']:.4f}, combined={r['combined']:.4f}")
+
+layerhook.remove_hooks()
